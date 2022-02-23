@@ -1,4 +1,5 @@
 import exp, { Application } from "express"
+import Cors from 'cors'
 
 import Controller from "./Interfaces/Controller"
 
@@ -26,6 +27,7 @@ export default class Server {
 
         this.srv.use(exp.urlencoded({ extended: true }))
         this.srv.use(exp.json())
+        this.srv.use(Cors())
     }
 
     private initializeConrtoller(controllers: Controller[]) {
