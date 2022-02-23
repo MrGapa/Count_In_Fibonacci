@@ -1,7 +1,8 @@
-import exp from 'express'
+import Server from "./Server"
 
-const app = exp()
+import { ApiController } from "./Controllers"
 
-app.get('/', (_, res) => res.send('Hello World'))
-
-app.listen(3000, () => console.log('Server up on port:', 3000))
+const SRV = new Server([
+    new ApiController()
+])
+SRV.listen()
