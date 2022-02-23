@@ -22,12 +22,16 @@ export default class Server {
         }
 
         this.srv.use(exp.static('public'))
+        this.srv.use(exp.static('client'))
+
         this.srv.use(exp.urlencoded({ extended: true }))
         this.srv.use(exp.json())
     }
 
     private initializeConrtoller(controllers: Controller[]) {
         controllers.forEach(c => this.srv.use('/', c.router))
+
+        this.srv.get('*', (req, res) => res.sendFile(`${process.env.INIT_CWD}/client/index.html`))
     }
 
     listen() {
